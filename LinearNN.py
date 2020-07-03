@@ -2,6 +2,10 @@ import math
 import numpy as np
 
 class LinearNN(SingleLayerNN):
+    
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
     def addLayer(self):
         self.mainLayer=Layer(1, 1)
@@ -31,7 +35,20 @@ class LinearNN(SingleLayerNN):
             print('\n')
 
             bd, wd = linearDerivatives()
+            
             self.mainLayer.weight=self.mainLayer.weight-learning_rate*wd
             self.mainLayer.bias=self.mainLayer.bias-learning_rate*bd
       
             epochsCompleted+=1
+        
+    def predict(self, xval):
+        return self.mainLayer.feedForward()
+    
+    def cost(self):
+        cost = 0
+        for inp, out in zip(self.x, self.y):
+            predicted = self.mainLayer.feedForward(inp)
+            loss = (predicted-out)**2
+            cost+=loss
+        cost = cost/(len(self.x)*2)
+        return cost
