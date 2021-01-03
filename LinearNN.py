@@ -24,11 +24,9 @@ class LinearNN(SingleLayerNN):
             bD = bD/len(self.x)
             wD = wD/len(self.x)
             return bD, wD
-    
-        epochsCompleted = 0
         
-        while epochsCompleted!=epochs:
-            print("Epochs="+str(epochsCompleted+1))
+        for i in range(epochs)
+            print("Epochs="+str(epochs))
             print("Weight:",self.mainLayer.weight)
             print("Bias:",self.mainLayer.bias)
             print('Loss:',self.cost())
@@ -38,8 +36,6 @@ class LinearNN(SingleLayerNN):
             
             self.mainLayer.weight=self.mainLayer.weight-learning_rate*wd
             self.mainLayer.bias=self.mainLayer.bias-learning_rate*bd
-      
-            epochsCompleted+=1
         
     def predict(self, xval):
         return self.mainLayer.feedForward()
